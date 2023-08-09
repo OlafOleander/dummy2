@@ -1,0 +1,21 @@
+name: Deps check via action
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  Dependencies:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check sample1 dependencies
+      id: deps_sample1
+      uses: mawosoft/dependadot-pwsh@master
+      with:
+        projects: ${{ secrets.GITHUB_TOKEN }}
+        restore: true
+        exclude-outdated-transitive: true
+        artifact-name: DepsSample1and2
